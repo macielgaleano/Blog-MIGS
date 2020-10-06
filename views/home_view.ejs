@@ -1,0 +1,39 @@
+
+<%- include('./partials/head_view.ejs'); %>  
+<%- include('./partials/nav.article.view.ejs'); %>  
+<div class="background">
+  <div class="home">
+    <div class="container principal-box" >
+      <div class="title-home">
+        Blog
+      </div>
+      <p class="subtitle-home">
+        Lorem ipsum, dolor sit amet consectetur adipisicing elit. Neque ut deleniti saepe quasi modi vitae omnis aliquid eius eligendi quam nisi blanditiis accusamus similique, cumque eos laborum voluptatum eaque minus.
+      </p>
+    </div> 
+  </div>
+</div>
+<div class="container">
+  <div class="row articles">
+      <% for(var i=0; i<articles.length; i++) {%>   
+        <div class="col-12 mb-4 mt-4 center">
+          <div class="card mb-3" style="">
+            <div class="row no-gutters">
+              <div class="col-md-4">
+                <img src="<%- articles[i].imagen %>" class="card-img img-fluid" alt="...">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title title"><%- articles[i].titulo %></h5>
+                  <p class="card-text text"><%- articles[i].contenido.slice(0, 200) + ' . . .' %></p>
+                  <p class="card-text"><small class="text-muted"><%- articles[i].fecha_creacion.getDate() + '/' + articles[i].fecha_creacion.getMonth() +'/' + articles[i].fecha_creacion.getFullYear()    %></small></p>
+                  <a name="" id="" class="btn btn-primary" href="<%-'articulo/'+ articles[i].id %>" role="button">Leer mas</a>
+                </div>
+              </div>
+            </div>
+          </div>      
+        </div>
+        <% } %>
+  </div> 
+</div>
+<%- include('./partials/end-body_view.ejs'); %>

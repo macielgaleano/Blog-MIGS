@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('./partials/head_view.ejs'); %>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 center">
+          <form
+            action="/admin/<%- article.id %>/modificar"
+            method="POST"
+            enctype="multipart/form-data"
+            class=""
+          >
+            <h2 class="m-5 display-5 text-center">Modificar articulo</h2>
+            <div class="form-group">
+              <label for="titulo">Titulo</label>
+
+              <textarea name="titulo" id="titulo" cols="100" rows="1">
+<%- article.titulo %></textarea
+              >
+              <label for="contenido">Contenido</label>
+              <textarea
+                class="form-control mb-3"
+                name="contenido"
+                id="contenido"
+                rows="15"
+              >
+<%- article.contenido %></textarea
+              >
+
+              <label for="imagen">Seleccion una imagen</label>
+              <input
+                type="file"
+                class="form-control-file"
+                name="imagen"
+                id="imagen"
+                value="<%- article.imagen %>"
+                placeholder=""
+                aria-describedby="fileHelpId"
+              />
+              <small id="fileHelpId" class="form-text text-muted mb-5"
+                >Inserte un archivo JPG o PNG</small
+              >
+
+              <button
+                name=""
+                id=""
+                class="btn btn-success p-2 mt-4"
+                href=""
+                type="submit"
+                role="button"
+              >
+                Modificar
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <%- include('./partials/end-body_view.ejs'); %>
+  </body>
+</html>

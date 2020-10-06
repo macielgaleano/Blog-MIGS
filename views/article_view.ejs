@@ -1,0 +1,105 @@
+<%- include('./partials/head_view.ejs'); %> <%-
+include('./partials/nav.article.view.ejs'); %>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-2 mt-5">
+      <a
+        name=""
+        id=""
+        class="btn btn-success close-article"
+        href="/"
+        role="button"
+        >Volver</a
+      >
+    </div>
+    <div class="col-6 mt-5 center">
+      <img class="img-fluid" src="<%- article.imagen %>" alt="" srcset="" />
+      <div class="center">
+        <small
+          ><%- author.nombre + ' ' +author.apellido %>
+          <a href=""><%- ' - ' + author.email %></a>
+        </small>
+      </div>
+    </div>
+    <div class="col-2"></div>
+  </div>
+  <div class="row">
+    <div class="col-12 mt-5 mb-5 text-center">
+      <h2 class="display-5"><%- article.titulo %></h2>
+      <small class="mb-5"><%- article.fecha_creacion %></small>
+      <p class="lead mt-5 content-text"><%- article.contenido %></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <h2>Comentarios</h2>
+      <ul class="list-group list-group-flush">
+        <% comments.forEach( comment => { %>
+        <li class="lead mt-5 content-text list-group-item">
+          <div class="d-flex justify-content-between unstyled">
+            <div class="row">
+              <div class="col-3">
+                <p class="font-weight-bold">
+                  <b><%- comment.autor_comentario %>: </b>
+                </p>
+                <small
+                  ><%-String(comment.fecha_comentario).slice(0,20) %></small
+                >
+              </div>
+              <div class="col-9">
+                <p>"<%- comment.comentario %>"</p>
+              </div>
+            </div>
+          </div>
+        </li>
+        <% }); %>
+      </ul>
+      <br />
+      <h2 class="mt-3 mb-3">Ingrese su comentario</h2>
+      <form
+        action="/articulo/agregarComentario"
+        method="POST"
+        class="form-group"
+      >
+        <div class="row">
+          <div class="col-6">
+            <label for="comment" class="">Comentario</label>
+            <input
+              type="text"
+              name="comment"
+              id="comment"
+              class="form-control mr-2"
+              placeholder=""
+              aria-describedby="helpId"
+            />
+          </div>
+          <div class="col-2">
+            <label for="autor-comment" class="">Autor del comentario</label>
+            <input
+              type="text"
+              name="autor-comment"
+              id="autor-comment"
+              class="form-control mr-2"
+              placeholder=""
+              aria-describedby="helpId"
+            />
+          </div>
+          <div class="col-2 mt-4">
+            <label for="autor-comment" class=""></label>
+            <a
+              name=""
+              id=""
+              type="submit"
+              class="btn btn-primary"
+              href="#"
+              role="button"
+              >Enviar comentario</a
+            >
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<%- include('./partials/end-body_view.ejs'); %>
