@@ -13,21 +13,12 @@
             method="POST"
             enctype="multipart/form-data"
             class=""
-            data-parsley-validate=""
           >
             <h2 class="m-5 display-5 text-center">Modificar articulo</h2>
             <div class="form-group">
               <label for="titulo">Titulo</label>
 
-              <textarea
-                placeholder="Ingrese un titulo"
-                required=""
-                data-parsley-required-message="Por favor ingrese un titulo"
-                name="titulo"
-                id="titulo"
-                cols="100"
-                rows="1"
-              >
+              <textarea name="titulo" id="titulo" cols="100" rows="1">
 <%- article.titulo %></textarea
               >
               <label for="contenido">Contenido</label>
@@ -36,10 +27,6 @@
                 name="contenido"
                 id="contenido"
                 rows="15"
-                placeholder="Ingrese contenido"
-                data-parsley-required-message="Por favor ingrese contenido"
-                required=""
-                aria-describedby="helpId"
               >
 <%- article.contenido %></textarea
               >
@@ -50,10 +37,8 @@
                 class="form-control-file"
                 name="imagen"
                 id="imagen"
-                required=""
                 value="<%- article.imagen %>"
                 placeholder=""
-                data-parsley-required-message="Por favor ingrese una imagen"
                 aria-describedby="fileHelpId"
               />
               <small id="fileHelpId" class="form-text text-muted mb-5"

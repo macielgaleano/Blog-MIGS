@@ -1,10 +1,6 @@
 const Model = require("../models/index");
-const MailController = require("./mail_controller");
-const passport = require("passport");
-const formidable = require("formidable");
-const path = require("path");
-const moment = require("moment");
 
+<<<<<<< HEAD
 const ArticleController = {};
 
 ArticleController.getArticles = async (req, res) => {
@@ -159,5 +155,8 @@ ArticleController.modify = async (req, res) => {
     res.redirect("/admin");
   });
 };
+=======
+const ArticleController = Model.Article;
+>>>>>>> parent of aad1a9e... Paso de archivos
 
 module.exports = ArticleController;

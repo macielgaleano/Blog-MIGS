@@ -1,7 +1,6 @@
 const Model = require("../models/index");
-const { body, validationResult } = require("express-validator");
-var bcrypt = require("bcryptjs");
 
+<<<<<<< HEAD:controllers/user_controller.js
 const UserController = {};
 
 UserController.createAuthor = (req, res) => {
@@ -43,5 +42,8 @@ UserController.createUser = (req, res) => {
   });
   res.redirect("/login");
 };
+=======
+const AuthorController = Model.Author;
+>>>>>>> parent of aad1a9e... Paso de archivos:controllers/author_controller.js
 
 module.exports = UserController;
