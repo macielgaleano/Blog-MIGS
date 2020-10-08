@@ -13,19 +13,19 @@ const sequelize = new Sequelize(
   }
 );
 
-const User = AuthorModel(sequelize, DataTypes, Model);
+const Author = AuthorModel(sequelize, DataTypes, Model);
 const Article = ArticleModel(sequelize, DataTypes, Model);
 const Comment = CommentModel(sequelize, DataTypes, Model);
 
 Article.hasMany(Comment);
 Comment.belongsTo(Article);
-User.hasMany(Article);
-Article.belongsTo(User);
+Author.hasMany(Article);
+Article.belongsTo(Author);
 
 module.exports = {
   sequelize,
   Sequelize,
   Article,
-  User,
+  Author,
   Comment,
 };

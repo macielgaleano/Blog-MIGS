@@ -18,11 +18,15 @@ const db_LoadArticles = async (Article, quantity) => {
   }
 };
 
-const db_LoadAuthors = async (User, quantity) => {
+const db_LoadAuthors = async (Author, quantity) => {
   {
     let autores = [];
 <<<<<<< HEAD
+<<<<<<< HEAD
     let authors_count = await User.count({});
+=======
+    let authors_count = await Author.count({});
+>>>>>>> parent of de836da... Cambia autor por usuario
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync("root", salt);
@@ -38,7 +42,7 @@ const db_LoadAuthors = async (User, quantity) => {
           email: faker.internet.email(),
         });
       }
-      User.bulkCreate(autores);
+      Author.bulkCreate(autores);
     }
   }
 };

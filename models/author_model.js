@@ -1,6 +1,6 @@
-const User = (sequelize, DataTypes, Model) => {
-  class User extends Model {}
-  User.init(
+const Author = (sequelize, DataTypes, Model) => {
+  class Author extends Model {}
+  Author.init(
     {
       nombre: { type: DataTypes.STRING(100), allowNull: false },
       apellido: { type: DataTypes.STRING(100), allowNull: false },
@@ -8,11 +8,11 @@ const User = (sequelize, DataTypes, Model) => {
     },
     {
       sequelize,
-      modelName: "User",
+      modelName: "Author",
       timestamps: false,
     }
   );
-  return User;
+  return Author;
 };
 
-module.exports = User;
+module.exports = Author;

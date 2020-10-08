@@ -1,6 +1,6 @@
 const moment = require("moment");
 const ArticleController = require("./controllers/article_controller");
-const UserController = require("./controllers/user_controller");
+const AuthorController = require("./controllers/author_controller");
 const CommentController = require("./controllers/comment_controller");
 const formidable = require("formidable");
 var fs = require("fs");
@@ -100,7 +100,7 @@ const routes = (app) => {
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-      UserController.createAuthor(req, res);
+      AuthorController.createAuthor(req, res);
     }
   );
 
@@ -109,6 +109,7 @@ const routes = (app) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
+<<<<<<< HEAD
     UserController.createUser(req, res);
 =======
   app.get("/admin/:id/eliminar", async (req, res) => {
@@ -119,6 +120,9 @@ const routes = (app) => {
     });
     res.redirect("/admin");
 >>>>>>> parent of aad1a9e... Paso de archivos
+=======
+    AuthorController.createUser(req, res);
+>>>>>>> parent of de836da... Cambia autor por usuario
   });
 
   app.get("/admin/:id/modificar", async (req, res) => {

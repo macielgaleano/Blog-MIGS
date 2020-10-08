@@ -1,9 +1,13 @@
 const Model = require("../models/index");
 
 <<<<<<< HEAD:controllers/user_controller.js
+<<<<<<< HEAD:controllers/user_controller.js
 const UserController = {};
+=======
+const AuthorController = {};
+>>>>>>> parent of de836da... Cambia autor por usuario:controllers/author_controller.js
 
-UserController.createAuthor = (req, res) => {
+AuthorController.createAuthor = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -13,7 +17,7 @@ UserController.createAuthor = (req, res) => {
   var hash = bcrypt.hashSync("root", salt);
 
   console.log(req.isAuthenticated());
-  Model.User.create({
+  Model.Author.create({
     nombre: req.body.name,
     apellido: req.body.surname,
     email: req.body.email,
@@ -23,7 +27,7 @@ UserController.createAuthor = (req, res) => {
   res.redirect("/admin");
 };
 
-UserController.createUser = (req, res) => {
+AuthorController.createUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -33,7 +37,7 @@ UserController.createUser = (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, salt);
 
   //console.log(req.body);
-  Model.User.create({
+  Model.Author.create({
     nombre: req.body.name,
     apellido: req.body.surname,
     email: req.body.email,
@@ -46,4 +50,4 @@ UserController.createUser = (req, res) => {
 const AuthorController = Model.Author;
 >>>>>>> parent of aad1a9e... Paso de archivos:controllers/author_controller.js
 
-module.exports = UserController;
+module.exports = AuthorController;

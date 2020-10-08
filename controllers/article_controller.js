@@ -13,7 +13,7 @@ ArticleController.getArticles = async (req, res) => {
     user = false;
   }
   const articles = await Model.Article.findAll({
-    include: [Model.User, Model.Comment],
+    include: [Model.Author, Model.Comment],
     order: ["fecha_creacion"],
   });
 
@@ -31,7 +31,7 @@ ArticleController.toAdmin = async (req, res) => {
   if (user[0].user === "root") {
     res.render("admin.view.ejs", {
       articles: await Model.Article.findAll({}),
-      authors: await Model.User.findAll({}),
+      authors: await Model.Author.findAll({}),
       user,
     });
   } else {
@@ -87,7 +87,7 @@ ArticleController.getArticle = async (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: Model.User,
+    include: Model.Author,
   });
   const comments = await Model.Comment.findAll({
     where: {
@@ -95,7 +95,7 @@ ArticleController.getArticle = async (req, res) => {
     },
   });
 
-  const author = article.User;
+  const author = article.Author;
   res.render("article_view", { article, author, comments, user });
 };
 
@@ -113,15 +113,15 @@ ArticleController.toModify = async (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: Model.User,
+    include: Model.Author,
   });
-  const author = article.User;
+  const author = article.Author;
   res.render("modify_view", { article });
 };
 
 ArticleController.apiGetArticles = async (req, res) => {
   const articles = await Model.Article.findAll({
-    include: [Model.User, Model.Comment],
+    include: [Model.Author, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(articles);
@@ -130,7 +130,7 @@ ArticleController.apiGetArticles = async (req, res) => {
 ArticleController.apiGetArticle = async (req, res) => {
   const article = await Model.Article.findOne({
     where: { id: req.params.id },
-    include: [Model.User, Model.Comment],
+    include: [Model.Author, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(article);
