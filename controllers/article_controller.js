@@ -1,6 +1,7 @@
 const Model = require("../models/index");
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 const ArticleController = {};
 
 ArticleController.getArticles = async (req, res) => {
@@ -155,6 +156,9 @@ ArticleController.modify = async (req, res) => {
     res.redirect("/admin");
   });
 };
+=======
+const ArticleController = Model.Article;
+>>>>>>> parent of aad1a9e... Paso de archivos
 =======
 const ArticleController = Model.Article;
 >>>>>>> parent of aad1a9e... Paso de archivos

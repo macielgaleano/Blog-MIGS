@@ -1,5 +1,6 @@
 const Model = require("../models/index");
 
+<<<<<<< HEAD
 <<<<<<< HEAD:controllers/user_controller.js
 <<<<<<< HEAD:controllers/user_controller.js
 const UserController = {};
@@ -49,5 +50,8 @@ AuthorController.createUser = (req, res) => {
 =======
 const AuthorController = Model.Author;
 >>>>>>> parent of aad1a9e... Paso de archivos:controllers/author_controller.js
+=======
+const AuthorController = Model.Author;
+>>>>>>> parent of aad1a9e... Paso de archivos
 
 module.exports = AuthorController;
