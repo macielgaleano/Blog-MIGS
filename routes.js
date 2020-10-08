@@ -72,7 +72,7 @@ const routes = (app) => {
   );
 
   app.post(
-    "/admin/crearAutor",
+    "/admin/crearUsuario",
     [body("surname").isLength({ min: 5 }), body("email").isEmail()],
     (req, res, next) => {
       if (req.isAuthenticated()) {
