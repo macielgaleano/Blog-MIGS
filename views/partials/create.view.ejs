@@ -7,6 +7,7 @@
           method="POST"
           enctype="multipart/form-data"
           class=""
+          data-parsley-validate=""
         >
           <h2 class="m-5 display-5 text-center">Crear un articulo</h2>
           <div class="form-group">
@@ -17,7 +18,10 @@
               name="title"
               id="title"
               aria-describedby="helpId"
-              placeholder="Ingrese un titulo..."
+              placeholder="Ingrese un titulo"
+              required=""
+              data-parsley-required-message="Por favor ingrese un titulo"
+              aria-describedby="helpId"
             />
             <label for="contenido">Contenido</label>
             <textarea
@@ -25,26 +29,23 @@
               name="contenido"
               id="contenido"
               rows="5"
-              placeholder="Ingrese contenido..."
+              placeholder="Contenido del articulo . . ."
+              required=""
+              aria-describedby="helpId"
             ></textarea>
-            <label for="date">Fecha</label>
-            <input
-              class="form-control mb-3"
-              type="datetime-local"
-              name="date"
-              id="date"
-            />
             <label for="image">Seleccion una imagen</label>
             <input
               type="file"
               class="form-control-file"
-              name="img"
-              id="image"
+              name="imagen"
+              id="imagen"
               placeholder=""
+              required=""
+              data-parsley-required-message="Por favor suba una imagen para el articulo"
               aria-describedby="fileHelpId"
             />
             <small id="fileHelpId" class="form-text text-muted mb-5"
-              >Inserte un archivo JPG o PNG</small
+              >Suba un archivo JPG o PNG</small
             >
             <div class="row mt-3">
               <div class="col-3">
@@ -69,8 +70,8 @@
                       <div class="row">
                         <div class="col-8">
                           <p id="selected">
-                            <%- authors[i].id + ' - ' + authors[i].nombre + ' ' +
-                            authors[i].apellido%>
+                            <%- authors[i].id + ' - ' + authors[i].nombre + ' '
+                            + authors[i].apellido%>
                           </p>
                         </div>
                       </div>
@@ -79,7 +80,7 @@
                   </div>
                 </div>
               </div>
-  
+
               <div class="col-4">
                 <a
                   name="add-author"
@@ -89,7 +90,7 @@
                   >+ Agregar Autor</a
                 >
               </div>
-  
+
               <div class="col-5">
                 <input
                   type="text"
@@ -97,7 +98,9 @@
                   name="id"
                   id="id_input"
                   aria-describedby="helpId"
-                  placeholder="ID..."
+                  placeholder="Id del autor..."
+                  required=""
+                  data-parsley-required-message="Por favor ingrese el id del autor"
                 />
               </div>
             </div>
@@ -118,7 +121,12 @@
             <div class="modal-content">
               <div class="">
                 <h2 class="title text-center">Agregar autor</h2>
-                <form action="/admin/crearAutor" method="POST" class="row center">
+                <form
+                  action="/admin/crearAutor"
+                  method="POST"
+                  class="row center"
+                  data-parsley-validate=""
+                >
                   <div class="col-2"></div>
                   <div class="col-8 mt-3 mb-3">
                     <label for="name">Nombre</label>
@@ -128,9 +136,12 @@
                       name="name"
                       id="name"
                       aria-describedby="helpId"
-                      placeholder="Ingrese un nombre..."
+                      placeholder="Ingrese un nombre"
+                      required=""
+                      data-parsley-required-message="Por favor ingrese el nombre del autor"
+                      aria-describedby="helpId"
                     />
-                    <label for="name">Apellido</label>
+                    <label for="sur">Apellido</label>
                     <input
                       type="text"
                       class="form-control mb-3"
@@ -138,6 +149,9 @@
                       id="surname"
                       aria-describedby="helpId"
                       placeholder="Ingrese un apellido..."
+                      required=""
+                      data-parsley-required-message="Por favor ingrese el apellido del autor"
+                      aria-describedby="helpId"
                     />
                     <label for="email">Email</label>
                     <input
@@ -147,6 +161,11 @@
                       id="email"
                       aria-describedby="helpId"
                       placeholder="Ingrese un email..."
+                      required=""
+                      data-parsley-required-message="Por favor ingrese el email del autor"
+                      data-parsley-pattern="^[a-zA-Z0-9_.]+[@][a-zA-Z_]+\.[a-zA-Z_]+\.?[a-zA-Z_]+\.?[a-zA-Z_]+\.?"
+                      data-parsley-pattern-message="Por favor, ingrese un email de autor valido"
+                      aria-describedby="helpId"
                     />
                     <div class="botones">
                       <button
@@ -173,4 +192,3 @@
     </div>
   </div>
 </div>
-

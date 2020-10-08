@@ -1,50 +1,25 @@
 const Model = require("../models/index");
+const MailController = require("./mail_controller");
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+const formidable = require("formidable");
+const path = require("path");
+const moment = require("moment");
+
 const ArticleController = {};
 
 ArticleController.getArticles = async (req, res) => {
-  const isLogged = req.isAuthenticated();
-  let user;
-
-  if (isLogged) {
-    user = req.session.passport.user;
-  } else {
-    user = false;
-  }
   const articles = await Model.Article.findAll({
     include: [Model.Author, Model.Comment],
     order: ["fecha_creacion"],
   });
-
-  res.render("home_view", { articles, user });
+  res.render("home_view", { articles });
 };
 
 ArticleController.toAdmin = async (req, res) => {
-  console.log("sesion user", req.session.passport.user);
-  let user;
-  if (req.isAuthenticated()) {
-    user = req.session.passport.user;
-  } else {
-    user = false;
-  }
-  if (user[0].user === "root") {
-    res.render("admin.view.ejs", {
-      articles: await Model.Article.findAll({}),
-      authors: await Model.Author.findAll({}),
-      user,
-    });
-  } else {
-    res.render("admin.view.ejs", {
-      articles: await Model.Article.findAll({
-        where: {
-          id: user[0].id,
-        },
-      }),
-      user,
-    });
-  }
+  res.render("admin.view.ejs", {
+    articles: await Model.Article.findAll({}),
+    authors: await Model.Author.findAll({}),
+  });
 };
 
 ArticleController.createArticle = async (req, res) => {
@@ -76,14 +51,6 @@ ArticleController.createArticle = async (req, res) => {
 };
 
 ArticleController.getArticle = async (req, res) => {
-  const isLogged = req.isAuthenticated();
-  let user;
-
-  if (isLogged) {
-    user = req.session.passport.user;
-  } else {
-    user = false;
-  }
   const article = await Model.Article.findOne({
     where: {
       id: req.params.id,
@@ -97,7 +64,7 @@ ArticleController.getArticle = async (req, res) => {
   });
 
   const author = article.Author;
-  res.render("article_view", { article, author, comments, user });
+  res.render("article_view", { article, author, comments });
 };
 
 ArticleController.delete = async (req, res) => {
@@ -156,11 +123,5 @@ ArticleController.modify = async (req, res) => {
     res.redirect("/admin");
   });
 };
-=======
-const ArticleController = Model.Article;
->>>>>>> parent of aad1a9e... Paso de archivos
-=======
-const ArticleController = Model.Article;
->>>>>>> parent of aad1a9e... Paso de archivos
 
 module.exports = ArticleController;

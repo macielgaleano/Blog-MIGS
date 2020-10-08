@@ -1,8 +1,10 @@
+const analyticsLib = require("analytics").default;
+const googleAnalytics = require("@analytics/google-analytics").default;
 require("dotenv").config();
 const {
   db_LoadArticles,
   db_LoadAuthors,
-  db_LoadComments,  
+  db_LoadComments,
 } = require("./seeder.js");
 const express = require("express");
 const formidable = require("formidable");
@@ -21,10 +23,9 @@ const port = process.env.APP_PORT;
 // Configuracion app
 app.use(express.static("public"));
 app.set("views", __dirname + "/views");
-app.set("view engine", "ejs", 'formidable');
+app.set("view engine", "ejs", "formidable");
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-
 
 // Sequelize
 sequelize
