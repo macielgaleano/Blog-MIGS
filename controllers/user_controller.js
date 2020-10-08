@@ -2,9 +2,9 @@ const Model = require("../models/index");
 const { body, validationResult } = require("express-validator");
 var bcrypt = require("bcryptjs");
 
-const AuthorController = {};
+const UserController = {};
 
-AuthorController.createAuthor = (req, res) => {
+UserController.createAuthor = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -14,7 +14,7 @@ AuthorController.createAuthor = (req, res) => {
   var hash = bcrypt.hashSync("root", salt);
 
   console.log(req.isAuthenticated());
-  Model.Author.create({
+  Model.User.create({
     nombre: req.body.name,
     apellido: req.body.surname,
     email: req.body.email,
@@ -24,7 +24,7 @@ AuthorController.createAuthor = (req, res) => {
   res.redirect("/admin");
 };
 
-AuthorController.createUser = (req, res) => {
+UserController.createUser = (req, res) => {
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
     return res.status(400).json({ errors: errors.array() });
@@ -34,7 +34,7 @@ AuthorController.createUser = (req, res) => {
   var hash = bcrypt.hashSync(req.body.password, salt);
 
   //console.log(req.body);
-  Model.Author.create({
+  Model.User.create({
     nombre: req.body.name,
     apellido: req.body.surname,
     email: req.body.email,
@@ -44,4 +44,4 @@ AuthorController.createUser = (req, res) => {
   res.redirect("/login");
 };
 
-module.exports = AuthorController;
+module.exports = UserController;

@@ -20,10 +20,10 @@ const db_LoadArticles = async (Article, quantity) => {
   }
 };
 
-const db_LoadAuthors = async (Author, quantity) => {
+const db_LoadAuthors = async (User, quantity) => {
   {
     let autores = [];
-    let authors_count = await Author.count({});
+    let authors_count = await User.count({});
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync("root", salt);
@@ -38,7 +38,7 @@ const db_LoadAuthors = async (Author, quantity) => {
           email: faker.internet.email(),
         });
       }
-      Author.bulkCreate(autores);
+      User.bulkCreate(autores);
     }
   }
 };

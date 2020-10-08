@@ -12,7 +12,7 @@ const {
   sequelize,
   Sequelize,
   Article,
-  Author,
+  User,
   Comment,
 } = require("./models/index");
 const session = require("express-session");
@@ -51,7 +51,7 @@ sequelize
   .sync({ force: true })
   .then(() => {})
   /// Cargo articulos a la tabla
-  .then(() => db_LoadAuthors(Author, 5))
+  .then(() => db_LoadAuthors(User, 5))
   .then(() => db_LoadArticles(Article, 5))
   .then(() => db_LoadComments(Comment, 10))
   .catch((error) => {

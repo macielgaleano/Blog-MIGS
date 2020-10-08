@@ -1,7 +1,7 @@
 const { body, validationResult } = require("express-validator");
 const passport = require("passport");
 const ArticleController = require("./controllers/article_controller");
-const AuthorController = require("./controllers/author_controller");
+const UserController = require("./controllers/user_controller");
 const CommentController = require("./controllers/comment_controller");
 
 //coment
@@ -87,7 +87,7 @@ const routes = (app) => {
       if (!errors.isEmpty()) {
         return res.status(400).json({ errors: errors.array() });
       }
-      AuthorController.createAuthor(req, res);
+      UserController.createAuthor(req, res);
     }
   );
 
@@ -96,7 +96,7 @@ const routes = (app) => {
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    AuthorController.createUser(req, res);
+    UserController.createUser(req, res);
   });
 
   app.get(
