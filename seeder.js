@@ -1,5 +1,6 @@
 var faker = require("faker");
 faker.locale = "es_MX";
+var bcrypt = require("bcryptjs");
 
 const db_LoadArticles = async (Article, quantity) => {
   let articles2 = [];
@@ -10,7 +11,8 @@ const db_LoadArticles = async (Article, quantity) => {
         titulo: faker.name.title(),
         contenido: faker.lorem.words(100),
         fecha_creacion: faker.date.recent(),
-        imagen: `${faker.image.nature()}?random=${Date.now()}`,
+        // imagen: `${faker.image.nature()}?random=${Date.now()}`,
+        imagen: faker.image.avatar(),
         AuthorId: faker.random.arrayElement([1, 2, 3]),
       });
     }
@@ -22,10 +24,16 @@ const db_LoadAuthors = async (Author, quantity) => {
   {
     let autores = [];
     let authors_count = await Author.count({});
+
+    var salt = bcrypt.genSaltSync(10);
+    var hash = bcrypt.hashSync("root", salt);
+
     if (await !authors_count) {
       for (let i = 0; i < quantity; i++) {
         autores.push({
           nombre: faker.name.firstName(),
+          user: "root",
+          password: hash,
           apellido: faker.name.lastName(),
           email: faker.internet.email(),
         });

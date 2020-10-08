@@ -35,9 +35,9 @@ include('./partials/nav.article.view.ejs'); %>
       <h2>Comentarios</h2>
       <ul class="list-group list-group-flush">
         <% comments.forEach( comment => { %>
-        <li class="lead mt-5 content-text list-group-item">
-          <div class="d-flex justify-content-between unstyled">
-            <div class="row">
+        <li class="lead mt-5 list-group-item">
+          <div class="unstyled">
+            <div class="row d-flex justify-content-between">
               <div class="col-3">
                 <p class="font-weight-bold">
                   <b><%- comment.autor_comentario %>: </b>
@@ -57,44 +57,49 @@ include('./partials/nav.article.view.ejs'); %>
       <br />
       <h2 class="mt-3 mb-3">Ingrese su comentario</h2>
       <form
-        action="/articulo/agregarComentario"
+        action="/articulo/<%- article.id %>/agregarComentario"
         method="POST"
         class="form-group"
+        data-parsley-validate=""
       >
         <div class="row">
           <div class="col-6">
-            <label for="comment" class="">Comentario</label>
+            <label for="comentario" class="">Comentario</label>
             <input
               type="text"
-              name="comment"
-              id="comment"
+              name="comentario"
+              id="comentario"
               class="form-control mr-2"
-              placeholder=""
+              placeholder="Ingrese su comentario"
+              required=""
+              data-parsley-required-message="Por favor ingrese su comentario"
               aria-describedby="helpId"
             />
           </div>
           <div class="col-2">
-            <label for="autor-comment" class="">Autor del comentario</label>
+            <label for="autor_comentario" class="">Autor del comentario</label>
             <input
               type="text"
-              name="autor-comment"
-              id="autor-comment"
+              name="autor_comentario"
+              id="autor_comentario"
               class="form-control mr-2"
-              placeholder=""
+              placeholder="Ingrese su nombre"
+              required=""
+              data-parsley-required-message="Por favor ingrese su nombre"
               aria-describedby="helpId"
             />
           </div>
           <div class="col-2 mt-4">
-            <label for="autor-comment" class=""></label>
-            <a
+            <label for="autor_comment" class=""></label>
+            <button
               name=""
               id=""
               type="submit"
-              class="btn btn-primary"
-              href="#"
+              class="btn btn-success"
               role="button"
-              >Enviar comentario</a
             >
+              Enviar comentario
+            </button>
           </div>
         </div>
       </form>
