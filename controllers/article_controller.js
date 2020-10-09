@@ -1,6 +1,6 @@
 const Model = require("../models/index");
 const MailController = require("./mail_controller");
-
+const passport = require("passport");
 const formidable = require("formidable");
 const path = require("path");
 const moment = require("moment");
@@ -8,18 +8,46 @@ const moment = require("moment");
 const ArticleController = {};
 
 ArticleController.getArticles = async (req, res) => {
+  const isLogged = req.isAuthenticated();
+  let user;
+
+  if (isLogged) {
+    user = req.session.passport.user;
+  } else {
+    user = false;
+  }
   const articles = await Model.Article.findAll({
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
-  res.render("home_view", { articles });
+
+  res.render("home_view", { articles, user });
 };
 
 ArticleController.toAdmin = async (req, res) => {
-  res.render("admin.view.ejs", {
-    articles: await Model.Article.findAll({}),
-    authors: await Model.Author.findAll({}),
-  });
+  console.log("sesion user", req.session.passport.user);
+  let user;
+  if (req.isAuthenticated()) {
+    user = req.session.passport.user;
+  } else {
+    user = false;
+  }
+  if (user[0].user === "root") {
+    res.render("admin.view.ejs", {
+      articles: await Model.Article.findAll({}),
+      users: await Model.User.findAll({}),
+      user,
+    });
+  } else {
+    res.render("admin.view.ejs", {
+      articles: await Model.Article.findAll({
+        where: {
+          id: user[0].id,
+        },
+      }),
+      user,
+    });
+  }
 };
 
 ArticleController.createArticle = async (req, res) => {
@@ -41,7 +69,7 @@ ArticleController.createArticle = async (req, res) => {
       contenido: contenido,
       fecha_creacion: fecha_creacion,
       imagen: "/img/" + path.basename(files.imagen.path),
-      AuthorId: id,
+      UserId: id,
     });
 
     await MailController.sendMail(title, contenido, fecha_creacion);
@@ -51,11 +79,19 @@ ArticleController.createArticle = async (req, res) => {
 };
 
 ArticleController.getArticle = async (req, res) => {
+  const isLogged = req.isAuthenticated();
+  let user;
+
+  if (isLogged) {
+    user = req.session.passport.user;
+  } else {
+    user = false;
+  }
   const article = await Model.Article.findOne({
     where: {
       id: req.params.id,
     },
-    include: Model.Author,
+    include: Model.User,
   });
   const comments = await Model.Comment.findAll({
     where: {
@@ -63,8 +99,8 @@ ArticleController.getArticle = async (req, res) => {
     },
   });
 
-  const author = article.Author;
-  res.render("article_view", { article, author, comments });
+  const user_id = article.user_id;
+  res.render("article_view", { article, user, comments, user_id });
 };
 
 ArticleController.delete = async (req, res) => {
@@ -81,15 +117,15 @@ ArticleController.toModify = async (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: Model.Author,
+    include: Model.User,
   });
-  const author = article.Author;
+  const user = article.User;
   res.render("modify_view", { article });
 };
 
 ArticleController.apiGetArticles = async (req, res) => {
   const articles = await Model.Article.findAll({
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(articles);
@@ -98,7 +134,7 @@ ArticleController.apiGetArticles = async (req, res) => {
 ArticleController.apiGetArticle = async (req, res) => {
   const article = await Model.Article.findOne({
     where: { id: req.params.id },
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(article);
