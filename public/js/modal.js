@@ -2,7 +2,7 @@ window.onload = function () {
   var modal = document.getElementById("myModal");
   var btn = document.getElementById("btnModal");
   var span = document.getElementsByClassName("close")[0];
-  console.log(span);
+  //console.log(span);
 
   btn.onclick = function () {
     modal.style.display = "block";
@@ -25,7 +25,7 @@ window.onload = function () {
 $(document).ready(function () {
   $('#selected').click(function () {
     var selectedText = $(this).find("option:selected").text();
-    console.log(selectedText);
+    //console.log(selectedText);
     $("#id_input").text(selectedText);
   });
 });

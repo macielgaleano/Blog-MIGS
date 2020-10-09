@@ -19,24 +19,23 @@
     >
       <ul class="navbar-nav mr-auto">
         <li class="nav-item">
-          <a class="nav-link text-white" href="/">Home</a>
+          <a class="nav-link text-white" href="/">Login</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="/">Articulos</a>
-        </li>
-        <li class="nav-item text-white">
-          <a class="nav-link text-white" href="/admin">Admin</a>
+          <a class="nav-link text-white" href="/register">Registrarse</a>
         </li>
       </ul>
-      <div>
-        <% if (user.length >= 1) { %>
-        <a class="nav-link text-white" href="/logout">Logout</a>
-        <p class="">Hola, <%- user[0].nombre %> <%- user[0].apellido %></p>
-
-        <% } else { %>
-        <a class="nav-link text-white" href="/admin">Login</a>
-        <% } %>
-      </div>
+      <form class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
     </div>
   </div>
 </nav>
