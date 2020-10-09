@@ -17,7 +17,7 @@ ArticleController.getArticles = async (req, res) => {
     user = false;
   }
   const articles = await Model.Article.findAll({
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
 
@@ -35,7 +35,7 @@ ArticleController.toAdmin = async (req, res) => {
   if (user[0].user === "root") {
     res.render("admin.view.ejs", {
       articles: await Model.Article.findAll({}),
-      authors: await Model.Author.findAll({}),
+      users: await Model.User.findAll({}),
       user,
     });
   } else {
@@ -69,7 +69,7 @@ ArticleController.createArticle = async (req, res) => {
       contenido: contenido,
       fecha_creacion: fecha_creacion,
       imagen: "/img/" + path.basename(files.imagen.path),
-      AuthorId: id,
+      UserId: id,
     });
 
     await MailController.sendMail(title, contenido, fecha_creacion);
@@ -91,7 +91,7 @@ ArticleController.getArticle = async (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: Model.Author,
+    include: Model.User,
   });
   const comments = await Model.Comment.findAll({
     where: {
@@ -99,8 +99,8 @@ ArticleController.getArticle = async (req, res) => {
     },
   });
 
-  const author = article.Author;
-  res.render("article_view", { article, author, comments, user });
+  const user_id = article.user_id;
+  res.render("article_view", { article, user, comments, user_id });
 };
 
 ArticleController.delete = async (req, res) => {
@@ -117,15 +117,15 @@ ArticleController.toModify = async (req, res) => {
     where: {
       id: req.params.id,
     },
-    include: Model.Author,
+    include: Model.User,
   });
-  const author = article.Author;
+  const user = article.User;
   res.render("modify_view", { article });
 };
 
 ArticleController.apiGetArticles = async (req, res) => {
   const articles = await Model.Article.findAll({
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(articles);
@@ -134,7 +134,7 @@ ArticleController.apiGetArticles = async (req, res) => {
 ArticleController.apiGetArticle = async (req, res) => {
   const article = await Model.Article.findOne({
     where: { id: req.params.id },
-    include: [Model.Author, Model.Comment],
+    include: [Model.User, Model.Comment],
     order: ["fecha_creacion"],
   });
   res.send(article);

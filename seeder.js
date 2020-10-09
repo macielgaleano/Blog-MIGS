@@ -13,32 +13,32 @@ const db_LoadArticles = async (Article, quantity) => {
         fecha_creacion: faker.date.recent(),
         // imagen: `${faker.image.nature()}?random=${Date.now()}`,
         imagen: faker.image.avatar(),
-        AuthorId: faker.random.arrayElement([1, 2, 3]),
+        UserId: faker.random.arrayElement([1, 2, 3]),
       });
     }
     Article.bulkCreate(articles2);
   }
 };
 
-const db_LoadAuthors = async (Author, quantity) => {
+const db_LoadUsers = async (User, quantity) => {
   {
     let autores = [];
-    let authors_count = await Author.count({});
+    let users_count = await User.count({});
 
     var salt = bcrypt.genSaltSync(10);
     var hash = bcrypt.hashSync("root", salt);
 
-    if (await !authors_count) {
+    if (await !users_count) {
       for (let i = 0; i < quantity; i++) {
         autores.push({
           nombre: faker.name.firstName(),
-          user: "root",
+          roleId: 1,
           password: hash,
           apellido: faker.name.lastName(),
           email: faker.internet.email(),
         });
       }
-      Author.bulkCreate(autores);
+      User.bulkCreate(autores);
     }
   }
 };
@@ -61,4 +61,4 @@ const db_LoadComments = async (Comment, quantity) => {
   }
 };
 
-module.exports = { db_LoadArticles, db_LoadAuthors, db_LoadComments };
+module.exports = { db_LoadArticles, db_LoadUsers, db_LoadComments };

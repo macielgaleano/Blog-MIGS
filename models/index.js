@@ -1,6 +1,6 @@
 const { Sequelize, DataTypes, Model } = require("sequelize");
 const ArticleModel = require("./article_model");
-const AuthorModel = require("./author_model");
+const UserModel = require("./user_model");
 const CommentModel = require("./comment_model");
 
 const sequelize = new Sequelize(
@@ -13,19 +13,19 @@ const sequelize = new Sequelize(
   }
 );
 
-const Author = AuthorModel(sequelize, DataTypes, Model);
+const User = UserModel(sequelize, DataTypes, Model);
 const Article = ArticleModel(sequelize, DataTypes, Model);
 const Comment = CommentModel(sequelize, DataTypes, Model);
 
 Article.hasMany(Comment);
 Comment.belongsTo(Article);
-Author.hasMany(Article);
-Article.belongsTo(Author);
+User.hasMany(Article);
+Article.belongsTo(User);
 
 module.exports = {
   sequelize,
   Sequelize,
   Article,
-  Author,
+  User,
   Comment,
 };

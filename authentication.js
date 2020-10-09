@@ -18,7 +18,7 @@ module.exports = {
         },
         function (accessToken, refreshToken, profile, done) {
           console.log(profile);
-          Modelo.Author.findOrCreate({
+          Modelo.User.findOrCreate({
             where: { email: profile.emails[0].value },
             defaults: {
               nombre: profile.name.givenName,
@@ -40,8 +40,7 @@ module.exports = {
     passport.use(
       new LocalStrategy((username, password, done) => {
         ///Busco username y password en db
-
-        Modelo.Author.findAll({
+        Modelo.User.findAll({
           limit: 1,
           where: {
             user: username,
