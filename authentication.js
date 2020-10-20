@@ -17,7 +17,6 @@ module.exports = {
           profileFields: ["id", "email", "name"],
         },
         function (accessToken, refreshToken, profile, done) {
-          console.log(profile);
           Modelo.User.findOrCreate({
             where: { email: profile.emails[0].value },
             defaults: {
